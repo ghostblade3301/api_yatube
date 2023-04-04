@@ -1,12 +1,17 @@
-from posts.models import Comment, Group, Post
 from rest_framework import serializers
+from rest_framework.relations import SlugRelatedField
+
+from posts.models import Comment, Group, Post
 
 
 # Сериализатор для модели Post
 class PostSerializer(serializers.ModelSerializer):
 
     # Установить поле автора только для чтения
-    author = serializers.StringRelatedField(read_only=True)
+    author = SlugRelatedField(
+        slug_field='username',
+        read_only=True,
+    )
 
     # Мета-класс определяет модель и поля для сериализации
     class Meta:
@@ -28,7 +33,10 @@ class GroupSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
 
     # Установить поля автора и поста только для чтения
-    author = serializers.StringRelatedField(read_only=True)
+    author = SlugRelatedField(
+        slug_field='username',
+        read_only=True,
+    )
 
     # Мета-класс определяет модель и поля для сериализации
     class Meta:
