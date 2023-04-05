@@ -9,7 +9,7 @@ from api.views import CommentViewSet, GroupViewSet, PostViewSet
 router = DefaultRouter()
 
 # Регистрируем PostViewSet с роутером
-router.register(r'posts', PostViewSet)
+router.register('posts', PostViewSet)
 # Регистрируем CommentViewSet с роутером
 # Параметр post_id используется для получения комментариев к конкретному посту
 router.register(
@@ -18,12 +18,12 @@ router.register(
     basename='Comment'
 )
 # Регистрируем GroupViewSet с роутером
-router.register(r'groups', GroupViewSet)
+router.register('groups', GroupViewSet)
 
 # Определяем все URL приложения
 urlpatterns = [
     # Создаем новый токен для получения учетных данных аутентификации
-    path('api/v1/api-token-auth/', obtain_auth_token),
+    path('v1/api-token-auth/', obtain_auth_token),
     # Включаем URL-адреса роутера как единую конечную точку API
-    path('api/v1/', include(router.urls)),
+    path('v1/', include(router.urls)),
 ]
